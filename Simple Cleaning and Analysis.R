@@ -34,3 +34,20 @@ kurtosis(as.numeric(rates[,2]))
 skewness(as.numeric(rates[,2]))
 sd(as.numeric(rates[,2]))
 mean(as.numeric(rates[,2]))
+
+#ANALYSIS FOR 2017 
+fullrates2017<-read.csv("fullyear2017.csv", header=TRUE)
+date<-as.Date(fullrates2017[,1],format="%d/%m/%Y")
+fullrates2017<-cbind(date,fullrates2017[,-1])
+head(fullrates2017)
+fullrates2017<-fullrates2017[order(fullrates2017$date),]
+head(fullrates2017)
+class(fullrates2017)
+library(xts)
+fullrates2017<-xts(fullrates2017[,2:5],order.by = fullrates2017[,1])
+head(fullrates2017)
+class(fullrates2017)
+
+rates2017<-as.numeric(fullrates2017$Mean)
+rates2017
+plot(rates2017, main="TIME PLOT OF 2017 EXCHANGE RATES", type="l", xlab="Days", ylab="Exchange Rate")
